@@ -82,7 +82,8 @@ rows is a multi-dimensional array where each row includes the ranges of pixels o
 ### advanced usage
 By default, geomask includes [proj4js-definitions](https://www.npmjs.com/package/proj4js-definitions), a large dataset of 
 projection information for almost all standard projections.  This will add about 175kb to your bundle size.  If your mask 
-is in the same projection as your raster or don't need built-in reprojection support, you can use `geomask/lite`.
+is in the same projection as your raster or don't need built-in reprojection support, you can use `geomask/lite`.  You will use
+a `reproject` function (instead of passing in raster_srs and mask_srs).
 ```js
 import geomask from "geomask/lite";
 import proj4 from "proj4";
