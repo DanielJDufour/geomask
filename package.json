@@ -1,0 +1,47 @@
+{
+  "name": "geomask",
+  "version": "0.0.0",
+  "description": "Low-Level GeoSpatial Masking Functions",
+  "main": "geomask.js",
+  "files": [
+    "lite.js",
+    "geomask.js"
+  ],
+  "scripts": {
+    "format": "npx prettier --arrow-parens=avoid --print-width=120 --trailing-comma=none --write *.js",
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielJDufour/geomask.git"
+  },
+  "keywords": [
+    "geotiff",
+    "geospatial",
+    "inside",
+    "intersection",
+    "mask",
+    "math",
+    "outside",
+    "raster"
+  ],
+  "author": "Daniel J. Dufour",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/DanielJDufour/geomask/issues"
+  },
+  "homepage": "https://github.com/DanielJDufour/geomask#readme",
+  "devDependencies": {
+    "find-and-read": "^1.1.0",
+    "flug": "^2.2.0",
+    "geotiff-from": "^1.0.1",
+    "geotiff-precise-bbox": "^0.0.1",
+    "proj4": "^2.8.0"
+  },
+  "dependencies": {
+    "advarr": "^0.4.0",
+    "dufour-peyton-intersection": "^0.0.1",
+    "reproject-geojson": "^0.1.0",
+    "segflip": "^0.0.1"
+  }
+}
