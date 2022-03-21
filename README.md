@@ -49,7 +49,7 @@ const { rows } = geomask.inside({
   mask_srs: 4326
 });
 ```
-rows is a multi-dimensional array where each row include ranges/segments of pixels
+rows is a multi-dimensional array where each row includes the ranges of pixels inside the mask
 ```js
 [
   <92 empty items>, // the top 92 rows of the raster don't intersect the geometry mask
@@ -59,3 +59,21 @@ rows is a multi-dimensional array where each row include ranges/segments of pixe
   ... 380 more items
 ]
 ```
+#### calculating exterior pixels
+In order to calculate the pixels that are outside a masking geometry,
+pass in the same parameters as above to the `geomask.outside` function
+```js
+import geomask from "geomask";
+
+const { rows } = geomask.outside({ raster_bbox, raster_srs, raster_height, raster_width, mask, mask_srs: 4326 })
+```
+rows is a multi-dimensional array where reach row includes the ranges of pixels outside the mask
+```js
+[
+  [ [0, 967] ], // the top rows of the raster don't intersect the geometry mask
+  [ [0, 967] ], // so the outside range extends the whole width of the raster
+  [ [0, 967] ],
+  <90 rows of [ [0, 967] ]>
+  [ [ 0, 499 ], [501, 967] ], // all but one pixel (index 500) falls outside the mask
+  ... 382 more items
+]
