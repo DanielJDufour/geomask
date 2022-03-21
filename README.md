@@ -49,3 +49,13 @@ const { rows } = geomask.inside({
   mask_srs: 4326
 });
 ```
+rows is a multi-dimensional array where each row include ranges/segments of pixels
+```js
+[
+  <92 empty items>, // the top 92 rows of the raster don't intersect the geometry mask
+  [ [ 500, 500 ] ], // only 1 pixel in this row falls within the geometry mask
+  [ [ 499, 501 ] ], // 3 pixels in this row fall within the mask, pixels with index 499, 500 and 501
+  [ [ 499, 502 ] ], // 4 pixels from index 499 to 502 fall within the mask
+  ... 380 more items
+]
+```
