@@ -67,7 +67,7 @@ import geomask from "geomask";
 
 const { rows } = geomask.outside({ raster_bbox, raster_srs, raster_height, raster_width, mask, mask_srs: 4326 })
 ```
-rows is a multi-dimensional array where reach row includes the ranges of pixels outside the mask
+rows is a multi-dimensional array where each row includes the ranges of pixels outside the mask
 ```js
 [
   [ [0, 967] ], // the top rows of the raster don't intersect the geometry mask
@@ -77,3 +77,26 @@ rows is a multi-dimensional array where reach row includes the ranges of pixels 
   [ [ 0, 499 ], [501, 967] ], // all but one pixel (index 500) falls outside the mask
   ... 382 more items
 ]
+```
+
+### advanced usage
+By default, geomask includes [proj4js-definitions](https://www.npmjs.com/package/proj4js-definitions), a large dataset of 
+projection information for almost all standard projections.  This will add about 175kb to your bundle size.  If your mask 
+is in the same projection as your raster or don't need built-in reprojection support, you can use `geomask/lite`.
+```js
+import geomask from "geomask/lite";
+import proj4 from "proj4";
+
+geomask.inside({
+  raster_bbox: [7698736.857788673, 163239.83797837654, 10066450.245949663, 1325082.6679127468 ],
+  raster_srs: 3857,
+  raster_height: 475,
+  raster_width: 968,
+  mask: { type: "FeatureCollection", features: [...] },
+
+  // if your mask is in a different projection than your raster
+  // provide a reproject function that converts an [x, y] point
+  // from the geometry mask to a point in the raster projection
+  reproject: proj4("EPSG:4326", "EPSG:3857").forward
+})
+```
