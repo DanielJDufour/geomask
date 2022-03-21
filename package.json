@@ -39,7 +39,6 @@
     "proj4": "^2.8.0"
   },
   "dependencies": {
-    "advarr": "^0.4.0",
     "dufour-peyton-intersection": "^0.0.1",
     "reproject-geojson": "^0.1.0",
     "segflip": "^0.0.1"
