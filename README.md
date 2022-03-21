@@ -89,7 +89,6 @@ import proj4 from "proj4";
 
 geomask.inside({
   raster_bbox: [7698736.857788673, 163239.83797837654, 10066450.245949663, 1325082.6679127468 ],
-  raster_srs: 3857,
   raster_height: 475,
   raster_width: 968,
   mask: { type: "FeatureCollection", features: [...] },
