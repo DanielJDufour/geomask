@@ -1,6 +1,11 @@
 # geomask
 Low-Level GeoSpatial Masking Functions
 
+# features
+- calculate raster pixels **inside** and **outside** a geometry mask
+- built-in reprojection support for almost all projections (thanks to [proj4-fully-loaded](https://www.npmjs.com/package/proj4-fully-loaded))
+- lite build for advanced usage 
+
 # install
 ```bash
 npm install geomask
