@@ -103,5 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
-# other files
+# pnpm files
 pnpm-lock.yaml
+.pnpm-store/
+
+# developer virtual machine configuration
+.dvm

@@ -1,4 +1,6 @@
 const dufour_peyton_intersection = require("dufour-peyton-intersection");
+const subtract = require("preciso/subtract.js");
+const divide = require("preciso/divide.js");
 const reprojectGeoJSON = require("reproject-geojson/pluggable.js");
 const segflip = require("segflip");
 
@@ -7,6 +9,15 @@ function inside({ raster_bbox, raster_height, raster_width, pixel_height, pixel_
     // reproject geometry to the srs of the raster
     mask = reprojectGeoJSON(mask, { in_place: false, reproject });
   }
+
+  if (pixel_height === undefined)
+    pixel_height = Number(
+      divide(subtract(raster_bbox[3].toString(), raster_bbox[1].toString()), raster_height.toString())
+    );
+  if (pixel_width === undefined)
+    pixel_width = Number(
+      divide(subtract(raster_bbox[2].toString(), raster_bbox[0].toString()), raster_width.toString())
+    );
 
   const insides = new Array(raster_height);
 
@@ -32,6 +43,15 @@ function outside({ raster_bbox, raster_height, raster_width, pixel_height, pixel
     // reproject geometry to the srs of the raster
     mask = reprojectGeoJSON(mask, { in_place: false, reproject });
   }
+
+  if (pixel_height === undefined)
+    pixel_height = Number(
+      divide(subtract(raster_bbox[3].toString(), raster_bbox[1].toString()), raster_height.toString())
+    );
+  if (pixel_width === undefined)
+    pixel_width = Number(
+      divide(subtract(raster_bbox[2].toString(), raster_bbox[0].toString()), raster_width.toString())
+    );
 
   // calculate inside segments
   const { rows: insides } = inside({

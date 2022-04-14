@@ -44,6 +44,19 @@ async function loadGeoTIFF(filename) {
     eq(rows.filter(Boolean).slice(0, 5), [[[500, 501]], [[500, 502]], [[500, 504]], [[499, 505]], [[499, 506]]]);
   });
 
+  test("insides (without pixel size)", ({ eq }) => {
+    const { rows } = lite.inside({
+      raster_bbox: tif4326.raster_bbox,
+      raster_height: tif4326.raster_height,
+      raster_width: tif4326.raster_width,
+      mask: geojson
+    });
+
+    eq(rows.length, 472);
+    eq(rows.filter(Boolean).length, 176);
+    eq(rows.filter(Boolean).slice(0, 5), [[[500, 501]], [[500, 502]], [[500, 504]], [[499, 505]], [[499, 506]]]);
+  });
+
   test("outsides", ({ eq }) => {
     const { rows } = lite.outside({
       raster_bbox: tif4326.raster_bbox,
