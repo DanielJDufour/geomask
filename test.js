@@ -1,3 +1,4 @@
+require("./require-esm-as-empty-object.js");
 const test = require("flug");
 const findAndRead = require("find-and-read");
 const from = require("geotiff-from");
