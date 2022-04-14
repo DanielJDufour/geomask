@@ -1,6 +1,6 @@
 {
   "name": "geomask",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Low-Level GeoSpatial Masking Functions",
   "main": "geomask.js",
   "files": [
