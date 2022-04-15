@@ -70,18 +70,24 @@ function outside({ raster_bbox, raster_height, raster_width, pixel_height, pixel
   // instead of generating a new array every time
   // const whole_row = [0, last_column_index];
 
-  const outsides = insides.map(segs => {
+  const outsides = [];
+  // using for loop instead of map because
+  // map skips empty insides/rows
+  for (let i = 0; i < insides.length; i++) {
+    const segs = insides[i];
     if (!Array.isArray(segs) || segs.length === 0) {
-      return [[0, last_column_index]];
+      outsides.push([[0, last_column_index]]);
+    } else {
+      outsides.push(
+        segflip({
+          segments: segs,
+          min: 0,
+          max: last_column_index,
+          debug: false
+        })
+      );
     }
-
-    return segflip({
-      segments: segs,
-      min: 0,
-      max: last_column_index,
-      debug: false
-    });
-  });
+  }
 
   return { rows: outsides };
 }

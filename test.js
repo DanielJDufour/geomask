@@ -69,7 +69,7 @@ async function loadGeoTIFF(filename) {
     });
 
     eq(rows.length, 472);
-    eq(rows.filter(Boolean).length, 176);
+    eq(rows.filter(Boolean).length, 472);
     eq(
       rows.every(segs => segs[0][0] === 0),
       true
@@ -111,7 +111,7 @@ async function loadGeoTIFF(filename) {
     });
 
     eq(rows.length, 475);
-    eq(rows.filter(Boolean).length, 178);
+    eq(rows.filter(Boolean).length, 475);
     eq(
       rows.every(segs => segs[0][0] === 0),
       true
@@ -153,7 +153,7 @@ async function loadGeoTIFF(filename) {
     });
 
     eq(rows.length, 475);
-    eq(rows.filter(Boolean).length, 178);
+    eq(rows.filter(Boolean).length, 475);
     eq(
       rows.every(segs => segs[0][0] === 0),
       true
