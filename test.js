@@ -1,4 +1,3 @@
-require("./require-esm-as-empty-object.js");
 const test = require("flug");
 const findAndRead = require("find-and-read");
 const from = require("geotiff-from");
@@ -40,7 +39,7 @@ async function loadGeoTIFF(filename) {
       mask: geojson
     });
 
-    eq(rows.length, 472);
+    eq(rows.length, tif4326.raster_height);
     eq(rows.filter(Boolean).length, 176);
     eq(rows.filter(Boolean).slice(0, 5), [[[500, 501]], [[500, 502]], [[500, 504]], [[499, 505]], [[499, 506]]]);
   });
@@ -162,5 +161,24 @@ async function loadGeoTIFF(filename) {
       rows.every(segs => segs[segs.length - 1][1] === tif3857.raster_width - 1),
       true
     );
+  });
+
+  ["sri-lanka.geojson", "sri-lanka-hires.geojson"].forEach(filename => {
+    ["inside", "outside"].forEach(strategy => {
+      test("no invalid ranges " + strategy + " " + filename, ({ eq }) => {
+        const geojson = JSON.parse(findAndRead(filename, { encoding: "utf-8" }));
+        const { rows } = full[strategy]({
+          debug: true,
+          raster_bbox: tif3857.raster_bbox,
+          raster_srs: 3857,
+          raster_height: tif3857.raster_height,
+          raster_width: tif3857.raster_width,
+          pixel_height: tif3857.pixel_height,
+          pixel_width: tif3857.pixel_width,
+          mask: geojson,
+          mask_srs: 4326
+        });
+      });
+    });
   });
 })();

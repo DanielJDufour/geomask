@@ -4,7 +4,16 @@ const divide = require("preciso/divide.js");
 const reprojectGeoJSON = require("reproject-geojson/pluggable.js");
 const segflip = require("segflip");
 
-function inside({ raster_bbox, raster_height, raster_width, pixel_height, pixel_width, mask, reproject }) {
+function inside({
+  debug = false,
+  raster_bbox,
+  raster_height,
+  raster_width,
+  pixel_height,
+  pixel_width,
+  mask,
+  reproject
+}) {
   if (typeof reproject === "function") {
     // reproject geometry to the srs of the raster
     mask = reprojectGeoJSON(mask, { in_place: false, reproject });
@@ -19,26 +28,28 @@ function inside({ raster_bbox, raster_height, raster_width, pixel_height, pixel_
       divide(subtract(raster_bbox[2].toString(), raster_bbox[0].toString()), raster_width.toString())
     );
 
-  const insides = new Array(raster_height);
-
-  // calculate pixels inside the geometry
-  dufour_peyton_intersection.calculate({
+  const { rows } = dufour_peyton_intersection.calculate({
     raster_bbox,
     raster_height,
     raster_width,
     pixel_height,
     pixel_width,
-    geometry: mask,
-    per_row_segment: ({ row, columns }) => {
-      if (!insides[row]) insides[row] = [];
-      insides[row].push(columns);
-    }
+    geometry: mask
   });
 
-  return { rows: insides };
+  return { rows };
 }
 
-function outside({ raster_bbox, raster_height, raster_width, pixel_height, pixel_width, mask, reproject }) {
+function outside({
+  debug = false,
+  raster_bbox,
+  raster_height,
+  raster_width,
+  pixel_height,
+  pixel_width,
+  mask,
+  reproject
+}) {
   if (typeof reproject === "function") {
     // reproject geometry to the srs of the raster
     mask = reprojectGeoJSON(mask, { in_place: false, reproject });
@@ -55,6 +66,7 @@ function outside({ raster_bbox, raster_height, raster_width, pixel_height, pixel
 
   // calculate inside segments
   const { rows: insides } = inside({
+    debug,
     raster_bbox,
     raster_height,
     raster_width,

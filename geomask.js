@@ -2,6 +2,7 @@ const lite = require("./lite.js");
 const reprojectGeoJSON = require("reproject-geojson");
 
 function calcMask({
+  debug = false,
   fname,
   raster_bbox,
   raster_srs,
@@ -17,6 +18,7 @@ function calcMask({
   }
 
   return lite[fname]({
+    debug,
     raster_bbox,
     raster_height,
     raster_width,
