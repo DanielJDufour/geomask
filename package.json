@@ -42,7 +42,7 @@
   "dependencies": {
     "dufour-peyton-intersection": "^0.0.2",
     "preciso": "^0.2.0",
-    "reproject-geojson": "^0.1.1",
+    "reproject-geojson": "^0.1.2",
     "segflip": "^0.0.1"
   }
 }
