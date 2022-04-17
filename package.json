@@ -40,7 +40,7 @@
     "require-esm-as-empty-object": "^0.0.1"
   },
   "dependencies": {
-    "dufour-peyton-intersection": "^0.0.2",
+    "dufour-peyton-intersection": "^0.1.0",
     "preciso": "^0.2.0",
     "reproject-geojson": "^0.1.2",
     "segflip": "^0.0.1"
