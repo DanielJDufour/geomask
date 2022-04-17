@@ -4,6 +4,18 @@ const divide = require("preciso/divide.js");
 const reprojectGeoJSON = require("reproject-geojson/pluggable.js");
 const segflip = require("segflip");
 
+function checkRows({ rows }) {
+  rows.forEach((segs, irow) => {
+    if (segs) {
+      segs.forEach(([start, end], iseg) => {
+        if (start > end) {
+          throw Error(`uh oh: invalid segment at row ${irow}, segment ${iseg}`);
+        }
+      });
+    }
+  });
+}
+
 function inside({
   debug = false,
   raster_bbox,
@@ -36,6 +48,8 @@ function inside({
     pixel_width,
     geometry: mask
   });
+
+  if (debug) checkRows({ rows });
 
   return { rows };
 }
@@ -75,6 +89,8 @@ function outside({
     mask
   });
 
+  if (debug) checkRows({ rows: insides });
+
   const last_column_index = raster_width - 1;
 
   // consider optimizing memory and speed
@@ -100,6 +116,8 @@ function outside({
       );
     }
   }
+
+  if (debug) checkRows({ rows: outsides });
 
   return { rows: outsides };
 }
