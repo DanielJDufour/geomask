@@ -112,3 +112,5 @@ pnpm-lock.yaml
 
 # other
 .DS_Store
+*.geojson
+*.aux.xml
