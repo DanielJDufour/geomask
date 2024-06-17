@@ -109,3 +109,6 @@ pnpm-lock.yaml
 
 # developer virtual machine configuration
 .dvm
+
+# other
+.DS_Store
