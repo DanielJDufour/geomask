@@ -41,7 +41,7 @@ async function loadGeoTIFF(filename) {
 
     eq(rows.length, tif4326.raster_height);
     eq(rows.filter(Boolean).length, 176);
-    eq(rows.filter(Boolean).slice(0, 5), [[[500, 501]], [[500, 502]], [[500, 504]], [[499, 505]], [[499, 506]]]);
+    eq(rows.filter(Boolean).slice(0, 5), [[[500, 501]], [[500, 503]], [[500, 504]], [[500, 505]], [[500, 506]]]);
   });
 
   test("insides (without pixel size)", ({ eq }) => {
