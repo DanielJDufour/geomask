@@ -115,3 +115,4 @@ pnpm-lock.yaml
 *.geojson
 *.aux.xml
 *.bak
+package-lock.json
